@@ -3,6 +3,7 @@ import axios from "axios";
 import { Input, MenuItem, Select } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function History() {
@@ -16,7 +17,8 @@ function History() {
         const fetchHistoricalData = async () => {
             try {
                 const response = await axios.get(
-                    `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/{apiVersion}/{endpoint}.json`
+                    // `https://api.exchangerate.host/timeseries?start_date=${startDate}&end_date=${endDate}&base=USD&symbols=${currency}`
+                    `https://{date}.currency-api.pages.dev/{apiVersion}/{endpoint}`
                 );
                 const rates = response.data.rates;
                 const formattedDates = Object.keys(rates);
@@ -29,36 +31,34 @@ function History() {
         };
         fetchHistoricalData();
     }, [currency, startDate, endDate]);
+
     return (
-        <>
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-                <div className="max-w-4xl bg-white shadow-lg rounded-2xl p-8 text-center w-full">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-4">Historical Exchange Rates</h1>
-                    <div className="flex justify-center space-x-4 mb-4">
-                        <Select value={currency} onChange={(e) => setCurrency(e.target.value)}>
-                            <MenuItem value="USD">USD</MenuItem>
-                            <MenuItem value="EUR">EUR</MenuItem>
-                            <MenuItem value="GBP">GBP</MenuItem>
-                        </Select>
-                        <Input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                        <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                    </div>
-                    <Line
-                        data={{
-                            labels: dates,
-                            datasets: [{
-                                label: `Exchange Rate for ${currency}`,
-                                data: historicalData,
-                                borderColor: "#3b82f6",
-                                fill: false,
-                            }],
-                        }}
-                    />
+        <div className="flex flex-col items-center container mx-auto justify-center min-h-screen bg-gray-100 p-6">
+            <div className="max-w-4xl bg-white shadow-lg rounded-2xl p-8 text-center w-full">
+                <h1 className="text-2xl font-bold text-gray-800 mb-4">Historical Exchange Rates</h1>
+                <div className="flex justify-center flex-wrap space-x-4 mb-4">
+                    <Select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                        <MenuItem value="USD">USD</MenuItem>
+                        <MenuItem value="EUR">EUR</MenuItem>
+                        <MenuItem value="GBP">GBP</MenuItem>
+                    </Select>
+                    <Input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                 </div>
+                <Line
+                    data={{
+                        labels: dates,
+                        datasets: [{
+                            label: `Exchange Rate for ${currency}`,
+                            data: historicalData,
+                            borderColor: "#3b82f6",
+                            fill: false,
+                        }],
+                    }}
+                />
             </div>
+        </div>
+    );
+};
 
-        </>
-    )
-}
-
-export default History
+export default History;

@@ -40,9 +40,9 @@ function Home() {
           </CardContent>
         </Card>
       </Container> */}
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-950 p-6">
       <div className="max-w-3xl bg-white shadow-lg rounded-2xl p-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to Currency Exchange</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to Current Exchanges</h1>
         <p className="text-gray-600 mb-6">
           Convert currencies in real time, view exchange rates, and check historical trends.
         </p>

@@ -8,7 +8,7 @@ function Exchange() {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        axios.get("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/v1/{endpoint}")
+        axios.get("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/{apiVersion}/{endpoint}")
             .then(response => {
                 setRates(response.data.rates);
             })

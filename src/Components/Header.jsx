@@ -26,7 +26,7 @@ function Header() {
                 <div className="flex gap-5 justify-between h-20 items-center p-4 lg:p-2">
 
                     {/* <img href='/' src="/mhslogo.webp" alt="Logo" className="w-15 h-10 lg:ml-4" /> */}
-                    <h3 className='text-black text-xl'>Best Exchanges</h3>
+                    <h3 className='text-black font-bold text-xl'>Current Exchanges</h3>
 
                     <div className="mx-auto text-black ">
                         <nav
